@@ -7,7 +7,7 @@ import org.w3c.dom.Document;
 import static org.junit.jupiter.api.Assertions.*;
 
 class XmlReaderTest {
-    private static final String xmlPath = "/Users/kliangh/Projects/project_IntelliJ/repo_Craftsman/xml-file-rw-example/testXml.xml";
+    private static final String xmlPath = "/Users/kliangh/Projects/project_IntelliJ/repo_Craftsman/xml-file-rw-example/exampleXml.xml";
     private static final String incorrectXmlPath = "/Users/kliangh/Projects/project_IntelliJ/repo_Craftsman/xml-file-rw-example/";
 
     private XmlReader xmlReader;
@@ -20,9 +20,14 @@ class XmlReaderTest {
     @Test
     void readXML() {
         Document xmlDocument = xmlReader.readXML(xmlPath);
-        Document nullXmlDocument = xmlReader.readXML(incorrectXmlPath);
 
         assertNotNull(xmlDocument);
+    }
+
+    @Test
+    void readXMLWithIncorrectPath() {
+        Document nullXmlDocument = xmlReader.readXML(incorrectXmlPath);
+
         assertNull(nullXmlDocument);
     }
 
