@@ -11,7 +11,7 @@ import java.io.IOException;
 /**
  * Created by kliangh on 28/06/2017.
  */
-public class XmlReeder {
+public class XmlReader {
 
     public Document readXML(String xmlPath) {
 
