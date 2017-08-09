@@ -1,5 +1,14 @@
-.DS_Store
-.idea
+### Gradle ###
 .gradle
-build
-out
+build/
+!gradle/wrapper/gradle-wrapper.jar
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+out/
+
+### MacOS ###
+.DS_Store
