@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="Big5"?>
+<!ELEMENT profile (doctor+)>
+<!ELEMENT doctor (name, department)>
+<!ATTLIST doctor d_id CDATA #REQUIRED>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT department (#PCDATA)>

@@ -1,32 +1,47 @@
 package code.kliangh.xml.utils;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 import org.w3c.dom.Document;
+import org.xml.sax.SAXException;
 
-import static org.junit.jupiter.api.Assertions.*;
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.IOException;
 
-class XmlReaderTest {
-    private static final String xmlPath = "/Users/kliangh/Projects/project_IntelliJ/repo_Craftsman/xml-file-rw-example/exampleXml.xml";
-    private static final String incorrectXmlPath = "/Users/kliangh/Projects/project_IntelliJ/repo_Craftsman/xml-file-rw-example/";
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
+public class XmlReaderTest {
+    private static final String XML_PATH = "./src/test/resources/xml_file_system/doctor_profile.xml";
+    private static final String INCORRECT_XML_PATH = "./src/test/resources/xml_file_system/";
 
     private XmlReader xmlReader;
 
-    @BeforeEach
-    void setUp() {
+    @Before
+    public void setUp() {
         xmlReader = new XmlReader();
     }
 
     @Test
-    void readXML() {
-        Document xmlDocument = xmlReader.readXML(xmlPath);
+    public void readXML() throws IOException, SAXException, ParserConfigurationException {
+        Document xmlDocument = xmlReader.readXML(XML_PATH);
 
-        assertNotNull(xmlDocument);
+        assertTrue(xmlDocument instanceof Document);
     }
 
     @Test
-    void readXMLWithIncorrectPath() {
-        Document nullXmlDocument = xmlReader.readXML(incorrectXmlPath);
+    public void readXMLWithIncorrectPath() {
+        Document nullXmlDocument = null;
+        try {
+            nullXmlDocument = xmlReader.readXML(INCORRECT_XML_PATH);
+        } catch (ParserConfigurationException e) {
+            assertTrue(e instanceof  ParserConfigurationException);
+        } catch (SAXException e) {
+            assertTrue(e instanceof SAXException);
+        } catch (IOException e) {
+            assertTrue(e instanceof IOException);
+        }
 
         assertNull(nullXmlDocument);
     }

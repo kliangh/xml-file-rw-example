@@ -13,26 +13,14 @@ import java.io.IOException;
  */
 public class XmlReader {
 
-    public Document readXML(String xmlPath) {
+    public Document readXML(String xmlPath) throws ParserConfigurationException, SAXException, IOException {
 
         Document document;
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
 
-        try {
+        DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
+        document = documentBuilder.parse(xmlPath);
 
-            DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
-            document = documentBuilder.parse(xmlPath);
-
-            return document;
-
-        } catch(ParserConfigurationException parserConfigurationException) {
-            parserConfigurationException.printStackTrace();
-        } catch(SAXException saxException) {
-            saxException.printStackTrace();
-        } catch(IOException ioException) {
-            ioException.printStackTrace();
-        }
-
-        return null;
+        return document;
     }
 }

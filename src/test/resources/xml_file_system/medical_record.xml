@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<medical_record>
+<patient p_id='1' name='Jane'>
+	<record r_id='1' d_id='2'>
+		<description>頭痛、發燒、流鼻水</description>
+		<diagnosis>感冒</diagnosis>
+		<treatment>回家休息</treatment>
+		<prescription>維他命C、阿斯匹靈</prescription>
+	</record>
+	
+	<record r_id='2' d_id='1'>
+		<description>頭痛、發燒、四肢無力、肌肉痠痛</description>
+		<diagnosis>登革熱</diagnosis>
+		<treatment>住院觀察</treatment>
+		<prescription>阿斯匹靈、止痛劑</prescription>
+	</record>
+</patient>
+</medical_record>

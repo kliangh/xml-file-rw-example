@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<profile>
+	<doctor d_id='1'>
+		<name>John</name>
+		<department>內科</department>
+	</doctor>
+
+	<doctor d_id='2'>
+		<name>Hawe</name>
+		<department>神經科</department>
+	</doctor>
+</profile>
+

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="Big5"?>
+<!ELEMENT medical_record (patient+)>
+<!ELEMENT patient (record+)>
+<!ELEMENT record (description, diagnosis, treatment, prescription)>
+<!ATTLIST patient p_id CDATA #REQUIRED>
+<!ATTLIST patient name CDATA #REQUIRED>
+<!ATTLIST record r_id CDATA #REQUIRED>
+<!ATTLIST record d_id CDATA #REQUIRED>
+<!ELEMENT description (#PCDATA)>
+<!ELEMENT diagnosis (#PCDATA)>
+<!ELEMENT treatment (#PCDATA)>
+<!ELEMENT prescription (#PCDATA)>
