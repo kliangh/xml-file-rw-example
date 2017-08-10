@@ -4,14 +4,11 @@ import org.junit.Before;
 import org.junit.Test;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
-import sun.jvm.hotspot.ui.SAEditorPane;
 
-import javax.swing.text.html.parser.Parser;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
-
 import java.io.IOException;
 
 import static org.junit.Assert.assertNotNull;
