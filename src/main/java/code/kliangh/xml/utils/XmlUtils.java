@@ -1,4 +1,4 @@
-package code.kliangh.xml.service;
+package code.kliangh.xml.utils;
 
 import org.w3c.dom.*;
 
@@ -32,6 +32,11 @@ public class XmlUtils {
         System.out.println(xmlString);
     }
 
+    private static void printIndent(int num) {
+        System.out.print("  +");
+        for (int i=0; i<=num; i++) System.out.print("-");
+    }
+
     private static String  getID(Node node) {
         int type = node.getNodeType();
         switch(type) {
@@ -45,7 +50,24 @@ public class XmlUtils {
             case 10: return "DOCTYPE：" + ((DocumentType) node).getSystemId();
 
             default: return "尚未定義：" + type;
-        }    }
+        }
+    }
+
+    public static String getMaxID(Document doc, String element_name, String attribute_name){
+
+        NodeList nodelist = doc.getElementsByTagName(element_name);
+        String maxId = "000";
+        int x=0,size= nodelist.getLength();
+        while (x<size) {
+            String id_value = nodelist.item(x).getAttributes().getNamedItem(attribute_name).getNodeValue();
+            if(Integer.parseInt(maxId) < Integer.parseInt(id_value))
+                maxId = id_value;
+            x++;
+        }
+        maxId = Integer.toString(Integer.parseInt(maxId)+1);
+
+        return maxId;
+    }
 
     private static void pChild(Node temp,int pos) {
         if ( temp.hasChildNodes() ) {
@@ -62,31 +84,13 @@ public class XmlUtils {
         }
     }
 
-    public static String getMaxID(Document doc, String element_name, String attribute_name){
-
-        NodeList nodelist = doc.getElementsByTagName(element_name);
-        String max_id = "000";
-        for(int x=0,size= nodelist.getLength(); x<size; x++) {
-            String id_value = nodelist.item(x).getAttributes().getNamedItem(attribute_name).getNodeValue();
-            if(Integer.parseInt(max_id) < Integer.parseInt(id_value))
-                max_id = id_value;
-        }
-        max_id = Integer.toString(Integer.parseInt(max_id)+1);
-
-        return max_id;
-    }
-
-    private static void printIndent(int num) {
-        System.out.print("  +");
-        for (int i=0; i<=num; i++) System.out.print("-");
-    }
-
     public static void showNodeData(Node node){
 
         Node child = (Node)node.getFirstChild();
-        for ( ; child != null; child = child.getNextSibling() ) {
+        while (child != null) {
             System.out.println(getID(child));
             pChild(child, 0);
+            child = child.getNextSibling();
         }
     }
 
