@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="Big5"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!ELEMENT medical_record (patient+)>
 <!ELEMENT patient (record+)>
 <!ELEMENT record (description, diagnosis, treatment, prescription)>

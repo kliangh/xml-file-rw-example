@@ -10,18 +10,18 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
-import static code.kliangh.xml.service.XmlUtils.getMaxID;
+import static code.kliangh.xml.utils.XmlUtils.getMaxID;
 
 public class PatientSeviceImpl implements PatientService {
 
     public Document newPatient(Document document, String name){
 
-        String p_id = getMaxID(document, "patient", "p_id");
+        String patientId = getMaxID(document, "patient", "p_id");
 
         Element root_element = document.getDocumentElement();
 
         Element new_patient=document.createElement("patient");
-        new_patient.setAttribute("p_id", p_id);
+        new_patient.setAttribute("p_id", patientId);
         new_patient.setAttribute("name", name);
         root_element.appendChild(new_patient);
 
