@@ -40,16 +40,16 @@ public class XmlUtils {
     private static String  getID(Node node) {
         int type = node.getNodeType();
         switch(type) {
-            case 1: return "元素：" + node.getNodeName();
-            case 2: return "屬性" + node.getAttributes();
-            case 3: return "內容：" + node.getNodeValue().trim();
+            case 1: return "Element：" + node.getNodeName();
+            case 2: return "Attribute" + node.getAttributes();
+            case 3: return "Value：" + node.getNodeValue().trim();
             case 4: return "CDATA Section：" + node.getNodeValue();
-            case 6: return "實體名稱：" + node.getNodeName();
-            case 8: return "註解：" + node.getNodeValue();
+            case 6: return "Element Name：" + node.getNodeName();
+            case 8: return "Comment：" + node.getNodeValue();
             case 9: return "Document：" + node.getNodeName();
             case 10: return "DOCTYPE：" + ((DocumentType) node).getSystemId();
 
-            default: return "尚未定義：" + type;
+            default: return "Not defined：" + type;
         }
     }
 
