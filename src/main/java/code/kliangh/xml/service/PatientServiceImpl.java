@@ -12,7 +12,7 @@ import javax.xml.xpath.XPathFactory;
 
 import static code.kliangh.xml.utils.XmlUtils.getMaxID;
 
-public class PatientSeviceImpl implements PatientService {
+public class PatientServiceImpl implements PatientService {
 
     public Document newPatient(Document document, String name){
 

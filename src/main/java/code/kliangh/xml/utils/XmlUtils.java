@@ -86,7 +86,7 @@ public class XmlUtils {
 
     public static void showNodeData(Node node){
 
-        Node child = (Node)node.getFirstChild();
+        Node child = node.getFirstChild();
         while (child != null) {
             System.out.println(getID(child));
             pChild(child, 0);

@@ -35,7 +35,7 @@ public class clinicManagementSystem {
         XmlWriter xmlWriter = new XmlWriter();
 
         DoctorService doctorService = new DoctorServiceImpl();
-        PatientService patientService = new PatientSeviceImpl();
+        PatientService patientService = new PatientServiceImpl();
         MedicalRecordService medicalRecordService = new MedicalRecordServiceImpl();
 
         doctor_profile = xmlReader.readXML(DOCTOR_PROFILE);
@@ -55,7 +55,7 @@ public class clinicManagementSystem {
             //Top menu, select function
             switch (functionSelect) {
 
-                //` Function
+                //Function
                 case "1":
                     System.out.println("Please select what you want to Query?");
                     System.out.println("1->Doctor, 2->Patient, 3->Patient medical records, 0->Back to function select menu");

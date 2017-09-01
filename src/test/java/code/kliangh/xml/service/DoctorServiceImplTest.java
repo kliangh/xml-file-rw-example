@@ -5,14 +5,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
-import org.xml.sax.SAXException;
+import org.w3c.dom.NodeList;
 
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.xpath.XPathExpressionException;
-import java.io.IOException;
-
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 
 public class DoctorServiceImplTest {
 
@@ -29,56 +24,34 @@ public class DoctorServiceImplTest {
     String testDoctorDepartment = "Test Department";
 
     @Before
-    public void setUp() {
-        try {
-            doctorProfile = xmlReader.readXML(DOCTOR_PROFILE);
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+    public void setUp() throws Exception {
+        doctorProfile = xmlReader.readXML(DOCTOR_PROFILE);
     }
 
     @Test
-    public void newDoctor() {
+    public void newDoctor() throws Exception {
         doctorProfile = doctorService.newDoctor(doctorProfile, testDoctorName, testDoctorDepartment);
         assertNotNull(doctorProfile);
     }
 
     @Test
-    public void getDoctor() {
-        Node doctor = null;
-        try {
-            doctor = doctorService.getDoctor(doctorProfile, "1");
-        } catch (XPathExpressionException e) {
-            e.printStackTrace();
-        }
+    public void getDoctor() throws Exception {
+        Node doctor = doctorService.getDoctor(doctorProfile, "1");
         assertNotNull(doctor);
 
-        try {
-            doctor = doctorService.getDoctor(doctorProfile, null);
-        } catch (XPathExpressionException e) {
-            e.printStackTrace();
-        }
+        doctor = doctorService.getDoctor(doctorProfile, null);
         assertNull(doctor);
     }
 
     @Test
-    public void updateDoctorProfile() {
-        Node newDoctor = null;
+    public void updateDoctorProfile() throws Exception {
+        doctorProfile = doctorService.newDoctor(doctorProfile, testDoctorName, testDoctorDepartment);
+        doctorProfile = doctorService.updateDoctorProfile(doctorProfile, testDoctorId, "name", "testName1");
 
-        try {
-            doctorProfile = doctorService.newDoctor(doctorProfile, testDoctorName, testDoctorDepartment);
-            doctorProfile = doctorService.updateDoctorProfile(doctorProfile, testDoctorId, "name", "testName1");
-            newDoctor = doctorService.getDoctor(doctorProfile, testDoctorId);
-        } catch (XPathExpressionException e) {
-            e.printStackTrace();
-        }
+        Node newDoctor = doctorService.getDoctor(doctorProfile, testDoctorId);
+        NodeList nodes = newDoctor.getFirstChild().getChildNodes();
 
-        newDoctor.getNodeValue();
+        assertEquals(nodes.item(0).getNodeValue(), "testName1");
     }
 
 }
