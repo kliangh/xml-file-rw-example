@@ -38,11 +38,11 @@ public class DoctorServiceImpl implements DoctorService {
 
 
     @Override
-    public Node getDoctor(Document document, String dcotorId) throws XPathExpressionException {
+    public Node getDoctor(Document document, String doctorId) throws XPathExpressionException {
 
-        if(dcotorId != null){
+        if(doctorId != null){
 
-            String queryExpression = "/profile/doctor[@d_id='"+ dcotorId +"']";
+            String queryExpression = "/profile/doctor[@d_id='"+ doctorId +"']";
             XPath xPath =  XPathFactory.newInstance().newXPath();
 
             Node node = (Node) xPath.compile(queryExpression).evaluate(document, XPathConstants.NODE);
@@ -52,22 +52,22 @@ public class DoctorServiceImpl implements DoctorService {
 
             return node;
         }else{
-            NodeList doctor_nodelist = document.getElementsByTagName("doctor");
-            NodeList doctor_name_nodelist = document.getElementsByTagName("name");
-            for(int x=0,x_flag=doctor_nodelist.getLength(); x<x_flag; x++) {
-                String query_d_id = doctor_nodelist.item(x).getAttributes().getNamedItem("d_id").getNodeValue();
-                String name = doctor_name_nodelist.item(x).getTextContent();
-                System.out.println("D_ID: " + query_d_id + ", Name: " + name);
+            NodeList doctorNodeList = document.getElementsByTagName("doctor");
+            NodeList doctorNameNodeList = document.getElementsByTagName("name");
+            for(int x = 0,x_flag = doctorNodeList.getLength(); x < x_flag; x++) {
+                String queryDoctorId = doctorNodeList.item(x).getAttributes().getNamedItem("d_id").getNodeValue();
+                String name = doctorNameNodeList.item(x).getTextContent();
+                System.out.println("D_ID: " + queryDoctorId + ", Name: " + name);
             }
         }return null;
     }
 
     @Override
     public Document updateDoctorProfile(Document document, String doctorId, String updateElement ,String updateData) throws XPathExpressionException {
-        String query_expression = "/profile/doctor[@d_id='"+ doctorId +"']/"+ updateElement;
+        String queryExpressioin = "/profile/doctor[@d_id='"+ doctorId +"']/"+ updateElement;
 
         XPath xPath = XPathFactory.newInstance().newXPath();
-        Element departmentElement = (Element) xPath.compile(query_expression).evaluate(document, XPathConstants.NODE);
+        Element departmentElement = (Element) xPath.compile(queryExpressioin).evaluate(document, XPathConstants.NODE);
 
         if (departmentElement != null) {
             departmentElement.setTextContent(updateData);

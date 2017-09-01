@@ -18,12 +18,12 @@ public class PatientSeviceImpl implements PatientService {
 
         String patientId = getMaxID(document, "patient", "p_id");
 
-        Element root_element = document.getDocumentElement();
+        Element rootElement = document.getDocumentElement();
 
-        Element new_patient=document.createElement("patient");
-        new_patient.setAttribute("p_id", patientId);
-        new_patient.setAttribute("name", name);
-        root_element.appendChild(new_patient);
+        Element newPatient = document.createElement("patient");
+        newPatient.setAttribute("p_id", patientId);
+        newPatient.setAttribute("name", name);
+        rootElement.appendChild(newPatient);
 
         return document;
     }
@@ -32,12 +32,12 @@ public class PatientSeviceImpl implements PatientService {
     public Node getPatient(Document doc, String patientId) throws XPathExpressionException {
 
         if(patientId != null){
-            String query_expression = "/medical_record/patient[@p_id='"+ patientId +"']";
+            String queryExpression = "/medical_record/patient[@p_id='"+ patientId +"']";
             XPath xPath =  XPathFactory.newInstance().newXPath();
 
             Node patient;
 
-            patient = (Node) xPath.compile(query_expression).evaluate(doc, XPathConstants.NODE);
+            patient = (Node) xPath.compile(queryExpression).evaluate(doc, XPathConstants.NODE);
             if(patient == null) {
                 System.out.println("No data found!!");
             }
@@ -45,10 +45,10 @@ public class PatientSeviceImpl implements PatientService {
             return patient;
 
         } else {
-            NodeList patient_nodelist = doc.getElementsByTagName("patient");
-            for(int x=0,size= patient_nodelist.getLength(); x<size; x++) {
-                String query_p_id = patient_nodelist.item(x).getAttributes().getNamedItem("p_id").getNodeValue();
-                String name = patient_nodelist.item(x).getAttributes().getNamedItem("name").getNodeValue();
+            NodeList patientNodeList = doc.getElementsByTagName("patient");
+            for(int x=0,size= patientNodeList.getLength(); x<size; x++) {
+                String query_p_id = patientNodeList.item(x).getAttributes().getNamedItem("p_id").getNodeValue();
+                String name = patientNodeList.item(x).getAttributes().getNamedItem("name").getNodeValue();
                 System.out.println("P_ID: " + query_p_id + ", Name: " + name);
             }
 
@@ -57,13 +57,13 @@ public class PatientSeviceImpl implements PatientService {
 
     public Document updatePatientName(Document document, String patientId, String updateName) throws XPathExpressionException {
 
-        String query_expression = "/medical_record/patient[@p_id='"+ patientId +"']";
+        String queryExpression = "/medical_record/patient[@p_id='"+ patientId +"']";
 
         XPath xPath = XPathFactory.newInstance().newXPath();
-        Element record_element = (Element) xPath.compile(query_expression).evaluate(document, XPathConstants.NODE);
+        Element recordElement = (Element) xPath.compile(queryExpression).evaluate(document, XPathConstants.NODE);
 
-        if (record_element != null) {
-            record_element.setAttribute("name", updateName);
+        if (recordElement != null) {
+            recordElement.setAttribute("name", updateName);
         }
 
         return document;
