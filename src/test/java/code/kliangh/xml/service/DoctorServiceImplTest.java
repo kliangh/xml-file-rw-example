@@ -1,12 +1,8 @@
 package code.kliangh.xml.service;
 
 import code.kliangh.xml.utils.XmlReader;
-import code.kliangh.xml.utils.XmlUtils;
-import code.kliangh.xml.utils.XmlWriter;
-import org.junit.Assert;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
@@ -18,12 +14,11 @@ import java.io.IOException;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
-class DoctorServiceImplTest {
+public class DoctorServiceImplTest {
 
     private static final String DOCTOR_PROFILE = "./src/main/resources/xml_file_system/doctor_profile.xml";
 
     private XmlReader xmlReader = new XmlReader();
-    private XmlWriter xmlWriter = new XmlWriter();
 
     private Document doctorProfile;
 
@@ -33,8 +28,8 @@ class DoctorServiceImplTest {
     String testDoctorName = "Test";
     String testDoctorDepartment = "Test Department";
 
-    @BeforeEach
-    void setUp() {
+    @Before
+    public void setUp() {
         try {
             doctorProfile = xmlReader.readXML(DOCTOR_PROFILE);
         } catch (ParserConfigurationException e) {
@@ -48,13 +43,13 @@ class DoctorServiceImplTest {
     }
 
     @Test
-    void newDoctor() {
+    public void newDoctor() {
         doctorProfile = doctorService.newDoctor(doctorProfile, testDoctorName, testDoctorDepartment);
         assertNotNull(doctorProfile);
     }
 
     @Test
-    void getDoctor() {
+    public void getDoctor() {
         Node doctor = null;
         try {
             doctor = doctorService.getDoctor(doctorProfile, "1");
@@ -72,7 +67,7 @@ class DoctorServiceImplTest {
     }
 
     @Test
-    void updateDoctorProfile() {
+    public void updateDoctorProfile() {
         Node newDoctor = null;
 
         try {
