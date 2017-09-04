@@ -1,5 +1,6 @@
 package code.kliangh.xml.service;
 
+import code.kliangh.xml.exception.ServiceException;
 import code.kliangh.xml.utils.XmlUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -38,7 +39,7 @@ public class DoctorServiceImpl implements DoctorService {
 
 
     @Override
-    public Node getDoctor(Document document, String doctorId) throws XPathExpressionException {
+    public Node getDoctor(Document document, String doctorId) throws XPathExpressionException, ServiceException {
 
         if(doctorId != null){
 
@@ -47,7 +48,7 @@ public class DoctorServiceImpl implements DoctorService {
 
             Node node = (Node) xPath.compile(queryExpression).evaluate(document, XPathConstants.NODE);
             if(node == null) {
-                System.out.println("No data found!!");
+                throw new ServiceException("No data found!!");
             }
 
             return node;

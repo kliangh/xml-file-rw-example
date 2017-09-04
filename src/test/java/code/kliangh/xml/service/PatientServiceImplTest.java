@@ -1,5 +1,6 @@
 package code.kliangh.xml.service;
 
+import code.kliangh.xml.exception.ServiceException;
 import code.kliangh.xml.utils.XmlReader;
 import org.junit.Before;
 import org.junit.Test;
@@ -39,6 +40,13 @@ public class PatientServiceImplTest {
 
         patient = patientService.getPatient(medicalRecord, null);
         assertNull(patient);
+    }
+
+    @Test(expected = ServiceException.class)
+    public void getNonExistingPatient() throws Exception {
+        Node patient = patientService.getPatient(medicalRecord, String.valueOf(Integer.MAX_VALUE));
+        assertNull(patient);
+
     }
 
     @Test
