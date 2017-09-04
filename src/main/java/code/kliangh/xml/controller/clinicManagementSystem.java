@@ -17,13 +17,13 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 
 public class clinicManagementSystem {
-    private static final String DOCTOR_PROFILE = "./src/main/resources/xml_file_system/doctor_profile.xml";
-    private static final String MEDICAL_RECORD = "./src/main/resources/xml_file_system/medical_record.xml";
+    private static final String DOCTOR_PROFILE = "./src/main/resources/xml_file_system/doctorProfiles.xml";
+    private static final String MEDICAL_RECORD = "./src/main/resources/xml_file_system/medicalRecords.xml";
 
-    private static Document doctor_profile;
-    private static Document medical_record;
+    private static Document doctorProfiles;
+    private static Document medicalRecords;
 
-    public static void main(String[] args) throws IOException, SAXException, ParserConfigurationException, XPathExpressionException, TransformerException {
+    public static void CommanLineController(String[] args) throws IOException, SAXException, ParserConfigurationException, XPathExpressionException, TransformerException {
 
         String functionSelect;
         String queryOption;
@@ -38,8 +38,8 @@ public class clinicManagementSystem {
         PatientService patientService = new PatientServiceImpl();
         MedicalRecordService medicalRecordService = new MedicalRecordServiceImpl();
 
-        doctor_profile = xmlReader.readXML(DOCTOR_PROFILE);
-        medical_record = xmlReader.readXML(MEDICAL_RECORD);
+        doctorProfiles = xmlReader.readXML(DOCTOR_PROFILE);
+        medicalRecords = xmlReader.readXML(MEDICAL_RECORD);
 
         InputStreamReader ISR = new InputStreamReader(System.in);
         BufferedReader BR = new BufferedReader(ISR);
@@ -74,7 +74,7 @@ public class clinicManagementSystem {
                             String doctorId = BR.readLine();
                             if(doctorId.length() == 0)
                                 doctorId = null;
-                            Node doctor = doctorService.getDoctor(doctor_profile, doctorId);
+                            Node doctor = doctorService.getDoctor(doctorProfiles, doctorId);
                             if(doctor != null)
                                 XmlUtils.showNodeData(doctor);
                             break;
@@ -83,7 +83,7 @@ public class clinicManagementSystem {
                             String patientId = BR.readLine();
                             if(patientId.length() == 0)
                                 patientId = null;
-                            Node patient = patientService.getPatient(medical_record, patientId);
+                            Node patient = patientService.getPatient(medicalRecords, patientId);
                             if(patient != null)
                                 XmlUtils.showNodeData(patient);
                             break;
@@ -92,7 +92,6 @@ public class clinicManagementSystem {
 
                             String p_id_case3 = null;
                             String r_id_case3 = null;
-                            String d_id_case3 = null;
 
                             p_id_case3 = BR.readLine();
                             while(p_id_case3.length() == 0){
@@ -107,9 +106,9 @@ public class clinicManagementSystem {
                                 r_id_case3 = BR.readLine();
                             }
 
-                            Node query_record = medicalRecordService.getRecord(medical_record, p_id_case3, r_id_case3);
-                            if(query_record != null)
-                                XmlUtils.showNodeData(query_record);
+                            Node queryRecord = medicalRecordService.getRecord(medicalRecords, p_id_case3, r_id_case3);
+                            if(queryRecord != null)
+                                XmlUtils.showNodeData(queryRecord);
                             break;
                     }
                         break;
@@ -141,7 +140,7 @@ public class clinicManagementSystem {
                                     System.out.println("Please give doctor department:");
                                     new_doctor_department = BR.readLine();
                                 }
-                                doctorService.newDoctor(doctor_profile, new_doctor_name, new_doctor_department);
+                                doctorService.newDoctor(doctorProfiles, new_doctor_name, new_doctor_department);
                                 break;
                             case "2":
                                 System.out.println("To create new Patient data please insert name.");
@@ -151,7 +150,7 @@ public class clinicManagementSystem {
                                     System.out.println("Please give Patient name:");
                                     new_patient_name = BR.readLine();
                                 }
-                                patientService.newPatient(medical_record, new_patient_name);
+                                patientService.newPatient(medicalRecords, new_patient_name);
                                 break;
                             case "3":
                                 System.out.println("To create new Record please Patient ID and Doctor ID firtst.");
@@ -168,37 +167,37 @@ public class clinicManagementSystem {
                                     new_record_d_id = BR.readLine();
                                 }
 
-                                HashMap<String, String> medical_record_hashmap = new HashMap<String, String>();
+                                HashMap<String, String> medicalRecord = new HashMap<String, String>();
                                 System.out.println("Second insert Description, Diagnosis, Treatment and Prescription.");
                                 System.out.println("Description: ");
                                 String new_record_description = BR.readLine();
                                 while(new_record_description.length() == 0 ){
                                     System.out.println("Please give description:");
                                     new_record_description = BR.readLine();
-                                }medical_record_hashmap.put("description", new_record_description);
+                                }medicalRecord.put("description", new_record_description);
 
                                 System.out.println("Diagnosis: ");
                                 String new_record_diagnosis = BR.readLine();
                                 while(new_record_diagnosis.length() == 0 ){
                                     System.out.println("Please give diagnosis:");
                                     new_record_diagnosis = BR.readLine();
-                                }medical_record_hashmap.put("diagnosis", new_record_diagnosis);
+                                }medicalRecord.put("diagnosis", new_record_diagnosis);
 
                                 System.out.println("Treatment: ");
                                 String new_record_treatment = BR.readLine();
                                 while(new_record_treatment.length() == 0 ){
                                     System.out.println("Please give treatment:");
                                     new_record_treatment = BR.readLine();
-                                }medical_record_hashmap.put("treatment", new_record_treatment);
+                                }medicalRecord.put("treatment", new_record_treatment);
 
                                 System.out.println("Prescription: ");
                                 String new_record_prescription = BR.readLine();
                                 while(new_record_prescription.length() == 0 ){
                                     System.out.println("Please give prescription:");
                                     new_record_prescription = BR.readLine();
-                                }medical_record_hashmap.put("prescription", new_record_prescription);
+                                }medicalRecord.put("prescription", new_record_prescription);
 
-                                medicalRecordService.addRecord(medical_record, new_record_p_id, new_record_d_id, medical_record_hashmap);
+                                medicalRecordService.addRecord(medicalRecords, new_record_p_id, new_record_d_id, medicalRecord);
                         }
                         break;
 
@@ -238,7 +237,7 @@ public class clinicManagementSystem {
                                     System.out.println("Please insert data: ");
                                     update_doctor_element_data = BR.readLine();
                                 }
-                                doctorService.updateDoctorProfile(doctor_profile, update_d_id, update_doctor_element, update_doctor_element_data);
+                                doctorService.updateDoctorProfile(doctorProfiles, update_d_id, update_doctor_element, update_doctor_element_data);
                             case "2":
                                 System.out.println("Which Patient's name you want to change? Please give Patient id: ");
                                 String update_patient_name_p_id = BR.readLine();
@@ -253,7 +252,7 @@ public class clinicManagementSystem {
                                     System.out.println("Please insert new name: ");
                                     update_patient_new_name = BR.readLine();
                                 }
-                                patientService.updatePatientName(medical_record, update_patient_name_p_id, update_patient_new_name);
+                                patientService.updatePatientName(medicalRecords, update_patient_name_p_id, update_patient_new_name);
 
                             case "3":
                                 System.out.println("Which record of Patient you want to update? ");
@@ -285,7 +284,7 @@ public class clinicManagementSystem {
                                     System.out.println("Please insert new data:");
                                     update_record_element_data = BR.readLine();
                                 }
-                                medicalRecordService.updateRecord(medical_record, update_record_p_id, update_record_r_id, update_record_element, update_record_element_data);
+                                medicalRecordService.updateRecord(medicalRecords, update_record_p_id, update_record_r_id, update_record_element, update_record_element_data);
                         }
                         break;
 
@@ -306,33 +305,33 @@ public class clinicManagementSystem {
                             System.out.println("Please insert Record ID:");
                             delete_record_r_id = BR.readLine();
                         }
-                        medicalRecordService.deleteRecord(medical_record, delete_record_p_id, delete_record_r_id);
+                        medicalRecordService.deleteRecord(medicalRecords, delete_record_p_id, delete_record_r_id);
                         break;
 
                     //Show XML file content
                     case "5":
-                        System.out.println("Show which XML file? 1->doctor_profile.xml or 2->medical_record.xml: ");
+                        System.out.println("Show which XML file? 1->doctorProfiles.xml or 2->medicalRecords.xml: ");
                         String show_xml_file = BR.readLine();
                         while(show_xml_file.length() == 0 && !show_xml_file.equals("1") && !show_xml_file.equals("2")){
                             System.out.println("Please insert xml file name:");
                             show_xml_file = BR.readLine();
                         }
                         if(show_xml_file.equals("1"))
-                            XmlUtils.printXMLTree(doctor_profile);
+                            XmlUtils.printXMLTree(doctorProfiles);
                         else
-                            XmlUtils.printXMLTree(medical_record);
+                            XmlUtils.printXMLTree(medicalRecords);
                         break;
 
                     //Convert XML file to HTML file
                     case "6":
-                        XmlUtils.convertXMLtoHTML("medical_record.xml", "medical_record.xsl", "medical_record.html");
+                        XmlUtils.convertXMLtoHTML("medicalRecords.xml", "medicalRecords.xsl", "medicalRecords.html");
                         System.out.println("Output Finished!!");
                         break;
 
                     //Save to XML
                     case "7":
-                        xmlWriter.saveToXML(doctor_profile, "./src/main/resources/xml_file_system/doctor_profile_dup.xml", "./src/main/resources/xml_file_system/doctor_profile.dtd");
-                        xmlWriter.saveToXML(medical_record, "./src/main/resources/xml_file_system/medical_record_dup.xml", "./src/main/resources/xml_file_system/medical_record.dtd");
+                        xmlWriter.saveToXML(doctorProfiles, "./src/main/resources/xml_file_system/doctor_profile_dup.xml", "./src/main/resources/xml_file_system/doctorProfiles.dtd");
+                        xmlWriter.saveToXML(medicalRecords, "./src/main/resources/xml_file_system/medical_record_dup.xml", "./src/main/resources/xml_file_system/medicalRecords.dtd");
                         break;
 
                     //Exit

@@ -12,19 +12,17 @@ public class PatientServiceImplTest {
 
     private static final String MEDICAL_RECORD = "./src/main/resources/xml_file_system/medical_record.xml";
 
-    private XmlReader xmlReader;
+    private XmlReader xmlReader = new XmlReader();
 
     private Document medicalRecord;
 
-    private PatientService patientService;
+    private PatientService patientService = new PatientServiceImpl();
 
     String testPatientId = "2";
     String testPatientName = "Test";
 
     @Before
     public void setUp() throws Exception {
-        xmlReader = new XmlReader();
-        patientService = new PatientServiceImpl();
         medicalRecord = xmlReader.readXML(MEDICAL_RECORD);
     }
 
