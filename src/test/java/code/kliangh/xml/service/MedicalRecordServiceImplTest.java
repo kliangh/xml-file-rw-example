@@ -13,8 +13,8 @@ import java.util.Map;
 import static org.junit.Assert.*;
 
 public class MedicalRecordServiceImplTest {
-    private static final String DOCTOR_PROFILE = "./src/main/resources/xml_file_system/doctor_profile.xml";
-    private static final String MEDICAL_RECORD = "./src/main/resources/xml_file_system/medical_record.xml";
+    private static final String DOCTOR_PROFILE = "./src/test/resources/xml_file_system/doctor_profile.xml";
+    private static final String MEDICAL_RECORD = "./src/test/resources/xml_file_system/medical_record.xml";
 
     private XmlReader xmlReader = new XmlReader();
 

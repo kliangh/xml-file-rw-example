@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
 
 public class PatientServiceImplTest {
 
-    private static final String MEDICAL_RECORD = "./src/main/resources/xml_file_system/medical_record.xml";
+    private static final String MEDICAL_RECORD = "./src/test/resources/xml_file_system/medical_record.xml";
 
     private XmlReader xmlReader = new XmlReader();
 

@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
 
 public class DoctorServiceImplTest {
 
-    private static final String DOCTOR_PROFILE = "./src/main/resources/xml_file_system/doctor_profile.xml";
+    private static final String DOCTOR_PROFILE = "./src/test/resources/xml_file_system/doctor_profile.xml";
 
     private XmlReader xmlReader = new XmlReader();
 

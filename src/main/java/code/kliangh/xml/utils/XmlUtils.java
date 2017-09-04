@@ -1,20 +1,18 @@
 package code.kliangh.xml.utils;
 
-import org.w3c.dom.*;
+import org.w3c.dom.Document;
+import org.w3c.dom.DocumentType;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathExpressionException;
-import javax.xml.xpath.XPathFactory;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.io.StringWriter;
-import java.util.HashMap;
 
 public class XmlUtils {
 
@@ -41,13 +39,13 @@ public class XmlUtils {
         int type = node.getNodeType();
         switch(type) {
             case 1: return "Element：" + node.getNodeName();
-            case 2: return "Attribute" + node.getAttributes();
+//            case 2: return "Attribute" + node.getAttributes();
             case 3: return "Value：" + node.getNodeValue().trim();
-            case 4: return "CDATA Section：" + node.getNodeValue();
-            case 6: return "Element Name：" + node.getNodeName();
-            case 8: return "Comment：" + node.getNodeValue();
-            case 9: return "Document：" + node.getNodeName();
-            case 10: return "DOCTYPE：" + ((DocumentType) node).getSystemId();
+//            case 4: return "CDATA Section：" + node.getNodeValue();
+//            case 6: return "Element Name：" + node.getNodeName();
+//            case 8: return "Comment：" + node.getNodeValue();
+//            case 9: return "Document：" + node.getNodeName();
+//            case 10: return "DOCTYPE：" + ((DocumentType) node).getSystemId();
 
             default: return "Not defined：" + type;
         }
