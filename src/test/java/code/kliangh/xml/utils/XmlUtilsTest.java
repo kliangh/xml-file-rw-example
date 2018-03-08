@@ -2,7 +2,6 @@ package code.kliangh.xml.utils;
 
 import code.kliangh.xml.service.DoctorService;
 import code.kliangh.xml.service.DoctorServiceImpl;
-import com.sun.org.apache.xerces.internal.dom.DocumentImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.w3c.dom.Document;
